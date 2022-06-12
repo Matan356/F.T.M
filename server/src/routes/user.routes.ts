@@ -20,7 +20,7 @@ import requireAdmin from "../middleware/requireAdmin";
 const router = express.Router();
 
 router.post(
-  "/api/users/:aid", 
+  "/api/users", 
   [requireAdmin, validateResource(createUserSchema)],
   createUserHandler
 );
@@ -28,19 +28,19 @@ router.post(
 router.get("/api/users", getUsersHandler); 
 
 router.get(
-  "/api/users/:aid/:uid", 
+  "/api/users/:uid", 
   [requireAdmin, validateResource(getUserSchema)],
   getUserHandler
 );
 
 router.delete(
-  "/api/users/:aid/:uid",
+  "/api/users/:uid",
   [requireAdmin, validateResource(deleteUserSchema)],
   deleteUserHandler
 );
 
 router.patch(
-  "/api/users/:aid/:uid", 
+  "/api/users/:uid", 
   [requireAdmin, validateResource(updateUserSchema)],
   updateUserHandler
 );

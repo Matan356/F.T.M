@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import config from "config";
 import {
   CreateUserInput,
   GetUserInput,
@@ -16,7 +15,7 @@ import {
 import logger from "../utils/logger";
 
 export async function createUserHandler(
-  req: Request<CreateUserInput["params"], {}, CreateUserInput["body"]>,
+  req: Request<{}, {}, CreateUserInput["body"]>,
   res: Response
 ) {
   const { body } = req;

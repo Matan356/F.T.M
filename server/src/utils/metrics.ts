@@ -4,8 +4,6 @@ import log from "./logger";
 
 const app = express();
 
-//Custom Metrics 
-// Histograms track sizes and frequency of events
 export const restResponseTimeHistogram = new client.Histogram({
   name: "rest_response_time_duration_seconds",
   help: "REST API response time in seconds",
@@ -18,16 +16,15 @@ export const databaseResponseTimeHistogram = new client.Histogram({
   labelNames: ["operation", "success"],
 });
 
-
 export function startMetricsServer() {
   const collectDefaultMetrics = client.collectDefaultMetrics;
 
-  collectDefaultMetrics(); // Default metrics are collected 
+  collectDefaultMetrics();
 
-  app.get("/metrics", async (req, res) => { // route of metrics
-    res.set("Content-Type", client.register.contentType); // added header strings to result
+  app.get("/metrics", async (req, res) => {
+    res.set("Content-Type", client.register.contentType);
 
-    return res.send(await client.register.metrics()); // send after geting all metrics
+    return res.send(await client.register.metrics());
   });
 
   app.listen(9100, () => {

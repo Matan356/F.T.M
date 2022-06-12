@@ -1,56 +1,4 @@
-import { number, object, string, TypeOf, z } from "zod";
-
-/**
- * @openapi
- * components:
- *  schemas:
- *    CreateUserInput:
- *      type: object
- *      required:
- *        - lastName
- *        - workerId
- *        - name
- *        - password
- *        - role
- *        - phone
- *      properties:
- *        workerId:
- *          type: string
- *          default: 1234
- *        name:
- *          type: string
- *          default: matan
- *        lastName:
- *          type: string
- *          default: matan
- *        password:
- *          type: string
- *          default: stringPassword123
- *        passwordConfirmation:
- *          type: string
- *          default: stringPassword123
- *        role:
- *          type: string
- *          default: employee
- *        phone:
- *          type: string
- *          default: 5548895623
- *    CreateUserResponse:
- *      type: object
- *      properties:
- *        workerId:
- *          type: string
- *        name:
- *          type: string
- *        phone:
- *          type: string
- *        _id:
- *          type: string
- *        createdAt:
- *          type: string
- *        updatedAt:
- *          type: string
- */
+import {  object, string, TypeOf, z } from "zod";
 
 const ROLES = ["admin", "manager", "employee"] as const;
 export const RolesEnum = z.enum(ROLES);
@@ -82,34 +30,28 @@ const userSchema = {
   }),
 };
 
-const adminId = {
+
+const userId = {
   params: object({
-    aid: string({ required_error: "admin id is required" }),
-  }),
-};
-const adminId_userId = {
-  params: object({
-    aid: string({ required_error: "admin id is required" }),
-    uid: string({ required_error: "ודקר id is required" }),
+    uid: string({ required_error: "user id is required" }),
   }),
 };
 
 export const createUserSchema = object({
   ...userSchema,
-  ...adminId,
 });
 
 export const deleteUserSchema = object({
-  ...adminId_userId,
+  ...userId,
 });
 
 export const getUserSchema = object({
-  ...adminId_userId,
+  ...userId,
 });
 
 export const updateUserSchema = object({
   ...userSchema,
-  ...adminId_userId,
+  ...userId,
 });
 
 export type CreateUserInput = Omit<

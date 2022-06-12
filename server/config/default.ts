@@ -3,8 +3,8 @@ export default {
   origin: "http://localhost:3000",
   dbUri: `mongodb+srv://test:test123@cluster0.qk4ej.mongodb.net/test?retryWrites=true&w=majority`,
   saltWorkFactor: 10,
-  accessTokenTtl: "15m",
-  refreshTokenTtl: "100m",
+  accessTokenTtl: "60m",
+  refreshTokenTtl: "1 day",
   publicKey: `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXzZerpx9qdaelwt1U7NCpWXQK
 km1OW4ohDF/7g01xDtYf8Nox9wzhhVQrFD+G4eaJoWxIhJYQTgT4ijMlpjXs07Mc

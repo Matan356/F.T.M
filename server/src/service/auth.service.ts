@@ -17,20 +17,9 @@ export async function reIssueAccessToken({
 
   if (!user) return false;
 
-  console.log("user exist :" + JSON.stringify(user));
-  // user: {
-  //   _id: new ObjectId("6297103535e839c11a4dd83c"),
-  //   email: 'matan845@gmail.com',
-  //   name: 'matan',
-  //   password: '$2b$10$IcFHaNibFuLrukde16P64OlmQEqvODHu6iXQLKtyviqnSIwOrz0jK',
-  //   createdAt: 2022-06-01T07:07:33.207Z,
-  //   updatedAt: 2022-06-01T07:07:33.207Z,
-  //   __v: 0
-  // }
-
   const accessToken = signJwt(
     { ...user },
-    { expiresIn: config.get("accessTokenTtl") } // 15 minutes
+    { expiresIn: config.get("accessTokenTtl") }
   );
 
   return accessToken;

@@ -26,12 +26,9 @@ export async function validatePassword({
   }
 
   const isValid = await user.comparePassword(password);
-  // logger.info(isValid); // true
+
   if (!isValid) return false;
-  // logger.info(JSON.stringify(omit(user.toJSON(), "password")));
-  //   {"_id":"628e104ba9a032627b1a09d3","name":"test3","lastName":"elgrabli",
-  //"workerId":"3412","role":"employee","phone":"0524459687","createdAt":"2022-05-25T11:17:31.856Z"
-  //,"updatedAt":"2022-05-25T11:17:31.856Z","__v":0}
+
   return omit(user.toJSON(), "password");
 }
 
