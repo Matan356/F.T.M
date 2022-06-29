@@ -19,7 +19,7 @@ export async function validatePassword({
   workerId: string;
   password: string;
 }) {
-  const user = await UserModel.findOne({ workerId });
+  const user = await UserModel.findOne({  workerId });
   if (!user) {
     logger.warn("Could not fund a user");
     return false;

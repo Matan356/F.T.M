@@ -8,6 +8,8 @@ import expense from "./expense.routes";
 import pettyCash from "./pettyCash.routes";
 import standards from "./standards.routes";
 import controls from "./control.routes";
+import completions from "./completions.routes";
+import events from './events.routes'
 
 const router = express.Router();
 
@@ -22,5 +24,7 @@ router.use(expense);
 router.use(pettyCash);
 router.use(standards);
 router.use(controls);
+router.use(completions);
+router.use(events);
 
 export default router;

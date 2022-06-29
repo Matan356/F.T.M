@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import {
   CreateControlsInput,
+  getCustomerControlsInput,
+  getUserControlsInput,
   UpdateControlsInput,
 } from "../schema/controls.schema";
 import {
@@ -9,6 +11,8 @@ import {
   findAndUpdateControls,
   findControls,
   getControls,
+  getCustomerControls,
+  getUserControls,
 } from "../service/controls.service";
 import logger from "../utils/logger";
 
@@ -17,11 +21,11 @@ export async function createControlsHandler(
   res: Response
 ) {
   const body = req.body;
-  const userName = `${res.locals.user.name}-${res.locals.user.lastName}`;
+  const userId = res.locals.user._id;
 
   const controls = await createControls({
     ...body,
-    userName: userName,
+    user: userId,
   });
 
   return res.send(controls);
@@ -82,6 +86,38 @@ export async function getAllcontrolsHandler(req: Request, res: Response) {
   try {
     const controls = await getControls();
     return res.send(controls);
+  } catch (e: any) {
+    logger.error(e);
+    return res.status(409).send(e.message);
+  }
+}
+
+export async function getUserControlsHandler(
+  req: Request<getUserControlsInput["params"]>,
+  res: Response
+) {
+  const userId = req.params.uid;
+  logger.info({ userId: userId });
+  try {
+    const ControlsOfUser = await getUserControls({ user: userId });
+    return res.send(ControlsOfUser);
+  } catch (e: any) {
+    logger.error(e);
+    return res.status(409).send(e.message);
+  }
+}
+
+export async function getCustomerControlsHandler(
+  req: Request<getCustomerControlsInput["params"]>,
+  res: Response
+) {
+  const customerId = req.params.cid;
+  logger.info({ customerId: customerId });
+  try {
+    const ControlsOfCustomer = await getCustomerControls({
+      customer: customerId,
+    });
+    return res.send(ControlsOfCustomer);
   } catch (e: any) {
     logger.error(e);
     return res.status(409).send(e.message);

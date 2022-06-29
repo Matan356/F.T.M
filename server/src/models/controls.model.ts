@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
+import { CustomerDocument } from "./customers.model";
 import { UserDocument } from "./user.model";
 
 export interface ControlsDocument extends mongoose.Document {
-  userName: UserDocument["name"];
+  user: UserDocument["_id"];
+  customer: CustomerDocument["_id"];
   RegisteredCustomers: number;
   ActualCustomers: number;
   AmountOfDishes: number;
@@ -13,7 +15,11 @@ export interface ControlsDocument extends mongoose.Document {
     vegetable: number;
     carbohydrate: number;
   };
-  weight: number;
+  weight: {
+    protein: number;
+    vegetable: number;
+    carbohydrate: number;
+  };
   amountOfBreads: number;
   amountOfFruits: number;
   badSmell: boolean;
@@ -40,14 +46,19 @@ export interface ControlsDocument extends mongoose.Document {
 
 const controlsSchema = new mongoose.Schema(
   {
-    userName: { type: mongoose.Schema.Types.String, ref: "User" },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    customer: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Customer",
+    },
     RegisteredCustomers: { type: Number, required: true },
     ActualCustomers: { type: Number, required: true },
     AmountOfDishes: { type: Number, required: true },
     dliveryTime: { type: String, required: true },
     mealTime: { type: String, required: true },
     temperatures: { type: Object, required: true },
-    weight: { type: Number, required: true },
+    weight: { type: Object, required: true },
     amountOfBreads: { type: Number, required: true },
     amountOfFruits: { type: Number, required: true },
     badSmell: { type: Boolean, required: true },

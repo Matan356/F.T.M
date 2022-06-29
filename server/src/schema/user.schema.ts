@@ -1,6 +1,6 @@
-import {  object, string, TypeOf, z } from "zod";
+import { object, string, TypeOf, z } from "zod";
 
-const ROLES = ["admin", "manager", "employee"] as const;
+const ROLES = ["admin", "employee"] as const;
 export const RolesEnum = z.enum(ROLES);
 
 const userSchema = {
@@ -23,13 +23,12 @@ const userSchema = {
     role: RolesEnum,
     workerId: string({
       required_error: "worker Id is required",
-    }).min(4, "The workerId number is too short - it should be 4 characters"),
+    }).length(4, "Must be exactly 4 characters"),
   }).refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match",
     path: ["passwordConfirmation"],
   }),
 };
-
 
 const userId = {
   params: object({
@@ -60,4 +59,4 @@ export type CreateUserInput = Omit<
 >;
 export type DeleteUserInput = TypeOf<typeof deleteUserSchema>;
 export type GetUserInput = TypeOf<typeof getUserSchema>;
-export type UpdateUserInput =   TypeOf<typeof updateUserSchema>
+export type UpdateUserInput = TypeOf<typeof updateUserSchema>;

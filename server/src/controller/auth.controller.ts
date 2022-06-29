@@ -6,7 +6,7 @@ import { signJwt } from "../utils/jwt.utils";
 export async function loginUserHandler(req: Request, res: Response) {
   const user = await validatePassword(req.body);
 
-  if (!user) return res.status(401).send("Invalid email or password");
+  if (!user) return res.status(401).send("Invalid workerId or password");
 
   const accessToken = signJwt(
     { ...user },

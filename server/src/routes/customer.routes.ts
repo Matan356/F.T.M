@@ -7,6 +7,7 @@ import {
   updateCustomerHandler,
 } from "../controller/customers.controller";
 import requireAdmin from "../middleware/requireAdmin";
+import requireUser from "../middleware/requireUser";
 import validateResource from "../middleware/validateResource";
 import {
   createCustomerSchema,
@@ -31,7 +32,7 @@ router.put(
 
 router.get(
   "/api/customers/:customerId",
-  [requireAdmin, validateResource(getCustomerSchema)],
+  [requireUser, validateResource(getCustomerSchema)],
   getCustomerHandler
 );
 
@@ -41,6 +42,6 @@ router.delete(
   deleteCustomerHandler
 );
 
-router.get("/api/customers", requireAdmin, getCustomersHandler);
+router.get("/api/customers", requireUser, getCustomersHandler);
 
 export default router;

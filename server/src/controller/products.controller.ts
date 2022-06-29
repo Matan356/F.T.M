@@ -47,7 +47,7 @@ export async function getProductHandler(
   res: Response
 ) {
   const productId = req.params.productId;
-  const product = await findProduct({ productId });
+  const product = await findProduct({ _id: productId });
 
   if (!product) {
     return res.sendStatus(404);
@@ -67,7 +67,7 @@ export async function deleteProductHandler(
     return res.sendStatus(404);
   }
 
-  await deleteProduct({ productId });
+  await deleteProduct({ _id: productId });
 
   return res.sendStatus(200);
 }

@@ -45,12 +45,12 @@ router.delete(
 );
 router.get("/api/expenses", requireAdmin, getExpensesHandler);
 router.get(
-  "/api/expenses/userExpenses/:uid",
+  "/api/userExpenses/:uid",
   requireAdmin,
   getUserExpensesHandler
 );
 router.get(
-  "/api/expenses/customerExpenses/:cid",
+  "/api/customerExpenses/:cid",
   requireAdmin,
   getCustomerExpensesHandler
 );

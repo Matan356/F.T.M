@@ -39,3 +39,19 @@ export async function getControls() {
     throw new Error(e);
   }
 }
+
+export async function getUserControls(
+  query: FilterQuery<ControlsDocument>,
+  options: QueryOptions = { lean: true }
+) {
+  let controls;
+  return (controls = await ControlsModel.find(query, {}, options));
+}
+
+export async function getCustomerControls(
+  query: FilterQuery<ControlsDocument>,
+  options: QueryOptions = { lean: true }
+) {
+  let controls;
+  return (controls = await ControlsModel.find(query, {}, options));
+}

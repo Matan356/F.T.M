@@ -1,4 +1,4 @@
-import { object, number, string, TypeOf, z } from "zod";
+import { object, string, TypeOf } from "zod";
 
 const payload = {
   body: object({
@@ -23,7 +23,7 @@ const payload = {
 const params = {
   params: object({
     customerId: string({
-      required_error: "kindegardenId is required",
+      required_error: "customerId is required",
     }),
   }),
 };

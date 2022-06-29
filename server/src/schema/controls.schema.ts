@@ -1,4 +1,4 @@
-import { object, number, string, TypeOf, z, boolean } from "zod";
+import { object, number, string, TypeOf,  boolean } from "zod";
 
 const payload = {
   body: object({
@@ -28,8 +28,16 @@ const payload = {
         required_error: "carbohydrate temperature is required ",
       }),
     }),
-    weight: number({
-      required_error: "weight is required",
+    weight: object({
+      protein: number({
+        required_error: "protein weight is required",
+      }),
+      vegetable: number({
+        required_error: "vegetable weight is required ",
+      }),
+      carbohydrate: number({
+        required_error: "carbohydrate weight is required ",
+      }),
     }),
     amountOfBreads: number({
       required_error: "Amount of Breads is required",
@@ -76,6 +84,9 @@ const payload = {
     revisited: boolean({
       required_error: "revisited confirmation is required",
     }),
+    customer: string({
+      required_error: "purchase date is required",
+    }),
   }),
 };
 
@@ -83,6 +94,21 @@ const params = {
   params: object({
     controlsId: string({
       required_error: "kindegardenId is required",
+    }),
+  }),
+};
+
+const userParams = {
+  params: object({
+    uid: string({
+      required_error: "userId is required",
+    }),
+  }),
+};
+const customerParams = {
+  params: object({
+    cid: string({
+      required_error: "userId is required",
     }),
   }),
 };
@@ -104,7 +130,17 @@ export const getControlsSchema = object({
   ...params,
 });
 
+export const getUserControlsSchema = object({
+  ...userParams,
+});
+
+export const getCustomerControlsSchema = object({
+  ...customerParams,
+});
+
 export type CreateControlsInput = TypeOf<typeof createControlsSchema>;
 export type ReadControlsInput = TypeOf<typeof getControlsSchema>;
 export type UpdateControlsInput = TypeOf<typeof updateControlsSchema>;
 export type DeleteControlsInput = TypeOf<typeof deleteControlsSchema>;
+export type getUserControlsInput = TypeOf<typeof getUserControlsSchema>;
+export type getCustomerControlsInput = TypeOf<typeof getCustomerControlsSchema>;

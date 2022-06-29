@@ -28,7 +28,7 @@ export async function findAndUpdateProduct(
 }
 
 export async function deleteProduct(query: FilterQuery<ProductDocument>) {
-  return ProductModel.deleteOne(query);
+  return ProductModel.deleteOne(query).lean();
 }
 
 export async function getProducts() {

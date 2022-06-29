@@ -27,6 +27,7 @@ const userParams = {
 
 export const createPettyCashSchema = object({
   ...payload,
+  ...userParams
 });
 
 export const updatePettyCashSchema = object({

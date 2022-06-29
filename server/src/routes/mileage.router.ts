@@ -40,11 +40,11 @@ router.get(
 
 router.delete(
   "/api/mileages/:mileageId",
-  [requireUser, validateResource(deleteMileageSchema)],
+  [requireAdmin, validateResource(deleteMileageSchema)],
   deleteMileageHandler
 );
 
-router.get("/api/mileages", requireUser, getMileagesHandler);
+router.get("/api/mileages", requireAdmin, getMileagesHandler);
 
 router.get(
   "/api/mileagesOfUser/:uid",

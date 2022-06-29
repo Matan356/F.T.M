@@ -1,44 +1,18 @@
 import express from "express";
 import {
-  createStandardsHandler,
-  deleteStandardsHandler,
   getAllStandardsHandler,
-  getStandardsHandler,
   updateStandardsHandler,
 } from "../controller/standards.controller";
 import requireAdmin from "../middleware/requireAdmin";
 import validateResource from "../middleware/validateResource";
-import {
-  createStandardsSchema,
-  deleteStandardsSchema,
-  getStandardsSchema,
-  updateStandardsSchema,
-} from "../schema/standards.schema";
+import { updateStandardsSchema } from "../schema/standards.schema";
 
 const router = express.Router();
-
-router.post(
-  "/api/standards",
-  [requireAdmin, validateResource(createStandardsSchema)],
-  createStandardsHandler
-);
 
 router.put(
   "/api/standards/:standardsId",
   [requireAdmin, validateResource(updateStandardsSchema)],
   updateStandardsHandler
-);
-
-router.get(
-  "/api/standards/:standardsId",
-  [requireAdmin, validateResource(getStandardsSchema)],
-  getStandardsHandler
-);
-
-router.delete(
-  "/api/standards/:standardsId",
-  [requireAdmin, validateResource(deleteStandardsSchema)],
-  deleteStandardsHandler
 );
 
 router.get("/api/standards", requireAdmin, getAllStandardsHandler);

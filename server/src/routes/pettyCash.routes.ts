@@ -21,26 +21,26 @@ import {
 const router = express.Router();
 
 router.post(
-  "/api/pettyCash",
-  [requireUser, validateResource(createPettyCashSchema)],
+  "/api/pettyCash/:uid",
+  [requireAdmin, validateResource(createPettyCashSchema)],
   createPettyCashHandler
 );
 
 router.put(
   "/api/pettyCash/:pettyCashId",
-  [requireUser, validateResource(updatePettyCashSchema)],
+  [requireAdmin, validateResource(updatePettyCashSchema)],
   updatePettyCashHandler
 );
 
 router.get(
   "/api/pettyCash/:pettyCashId",
-  [requireUser, validateResource(getPettyCashSchema)],
+  [requireAdmin, validateResource(getPettyCashSchema)],
   getPettyCashHandler
 );
 
 router.delete(
   "/api/pettyCash/:pettyCashId",
-  [requireUser, validateResource(deletePettyCashSchema)],
+  [requireAdmin, validateResource(deletePettyCashSchema)],
   deletePettyCashHandler
 );
 

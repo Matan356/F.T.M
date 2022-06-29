@@ -56,7 +56,7 @@ const deserializeUser = async (
     }
 
     const result = verifyJwt(newAccessToken as string);
-    logger.info(result.valid && " result exist");
+    result?.valid && logger.info("result exist");
     res.locals.user = result.decoded;
     return next();
   }

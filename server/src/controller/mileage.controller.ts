@@ -74,7 +74,7 @@ export async function deleteMileageHandler(
     return res.sendStatus(404);
   }
 
-  await deleteMileage({ mileageId });
+  await deleteMileage({_id: mileageId });
 
   return res.sendStatus(200);
 }

@@ -12,7 +12,7 @@ export interface CustomerDocument extends mongoose.Document {
 
 const costomerSchema = new mongoose.Schema(
   {
-    authority: { type: String, required: true, unique: true },
+    authority: { type: String, required: true},
     name: { type: String, required: true },
     axis: { type: String, required: true },
     address: { type: String, required: true },

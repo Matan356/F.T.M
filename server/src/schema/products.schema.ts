@@ -1,7 +1,5 @@
 import { object, number, string, TypeOf, z } from "zod";
 
-
-
 const TYPES = ["protein", "carbohydrate", "vegetable"] as const;
 export const TypesEnum = z.enum(TYPES);
 

@@ -1,6 +1,5 @@
 import { object, number, string, TypeOf } from "zod";
 
-
 const payload = {
   body: object({
     initial: number({
@@ -8,7 +7,9 @@ const payload = {
     }),
     final: number({
       required_error: "Final number of mileages is required",
-    })
+    }),
+  }).refine((data) => data.initial < data.final, {
+    message: "The final mileage can not be less than the initial mileage",
   }),
 };
 
@@ -17,7 +18,7 @@ const params = {
     mileageId: string({
       required_error: "MileageId is required",
     }),
-  }), 
+  }),
 };
 
 const userParams = {

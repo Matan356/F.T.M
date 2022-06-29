@@ -52,7 +52,7 @@ export async function getUserHandler(
   } catch (e: any) {
     logger.error(e);
     return res.status(409).send(e.message);
-  }
+  } 
   return res.send(user);
 }
 

@@ -18,11 +18,11 @@ import { getStandards } from "../service/standards.service";
 import logger from "../utils/logger";
 
 export async function createPettyCashHandler(
-  req: Request<{}, {}, CreatePettyCashInput["body"]>,
+  req: Request<CreatePettyCashInput["params"], {}, CreatePettyCashInput["body"]>,
   res: Response
 ) {
   const body = req.body;
-  const userId = res.locals.user._id;
+  const userId = req.params.uid;
   const standards = await getStandards();
   const pettyCash = await createPettyCash({
     ...body,
